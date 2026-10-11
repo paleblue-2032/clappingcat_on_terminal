@@ -72,16 +72,14 @@ fn draw(
     rows: usize,
 ) -> io::Result<()> {
     let term_w = terminal::size()?.0 as usize;
-    let mut y = start_y;
 
-    for line in frame {
+    for (y, line) in (start_y..).zip(frame.iter().copied()) {
         queue!(
             out,
             MoveTo(start_x as u16, y as u16),
             Clear(ClearType::UntilNewLine),
             Print(line)
         )?;
-        y += 1;
     }
 
     let hx = term_w.saturating_sub(UnicodeWidthStr::width(HINT)) / 2;

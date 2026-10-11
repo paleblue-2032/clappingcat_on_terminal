@@ -1,0 +1,6 @@
+* text=auto eol=lf
+
+*.sh text eol=lf
+
+# 生成物 (動画から作った ASCII フレーム)。差分表示・言語統計から除外する
+assets/frames.txt linguist-generated=true -diff

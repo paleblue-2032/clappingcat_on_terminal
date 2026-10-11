@@ -45,7 +45,7 @@ clpcat --fps 24       # 再生速度を上げる
 | `-n, --repeat <N>` | 再生回数（`0` で無限ループ） | `1` |
 | `--fps <FPS>` | 再生速度（fps） | `12` |
 
-再生中は `q` / `Esc` / `Ctrl-C` で閉じられます。端末が狭いときは短いメッセージだけ出ます（目安: 36x22 以上）。
+再生中は `q` / `Esc` / `Ctrl-C` で閉じられます。
 
 ## インストール
 
@@ -145,7 +145,7 @@ command_not_found_handle() {
 
 ## フレームを作り直す
 
-`assets/frames.txt` は元動画（`【猫ミーム】Clapping Cat Meme`）から生成したASCIIフレームです。
+`assets/frames.txt` は元動画（`Clapping Cat Meme`）から生成したASCIIフレームです。
 別の動画に差し替えたいときは `tools/render.py` を使います（`ffmpeg` と Python 3 が必要）:
 
 ```sh
@@ -167,4 +167,4 @@ cargo build --release
 
 ## ライセンス
 
-MIT License（`LICENSE` 参照）。
+[MIT](LICENSE) © 2026 paleblue-2032

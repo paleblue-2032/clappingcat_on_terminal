@@ -3,7 +3,7 @@
 
 `assets/frames.txt` を作る。ffmpeg と Python 3 が必要。
 
-  tools/render.py [動画] --fps 12 --cols 40 --rows 22
+  tools/render.py <動画> --fps 12 --cols 34 --rows 20
 
 ffmpeg は PATH か環境変数 FFMPEG から探す。
 """
@@ -17,10 +17,6 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_VIDEO = os.environ.get(
-    "CLPCAT_SOURCE",
-    "/home/paleblue_2032/Downloads/【猫ミーム】Clapping Cat Meme - YouTube.mov",
-)
 
 
 def find_ffmpeg() -> str:
@@ -32,7 +28,7 @@ def find_ffmpeg() -> str:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("video", nargs="?", default=DEFAULT_VIDEO, help="入力動画")
+    ap.add_argument("video", nargs="?", default=os.environ.get("CLPCAT_SOURCE"), help="入力動画")
     ap.add_argument("--fps", type=int, default=12)
     ap.add_argument("--cols", type=int, default=34)
     ap.add_argument("--rows", type=int, default=20)
@@ -42,6 +38,9 @@ def main() -> int:
     ap.add_argument("--ramp", default="@%#*+=-:. ", help="暗→明の順の文字ランプ")
     ap.add_argument("--out", default=str(ROOT / "assets" / "frames.txt"))
     args = ap.parse_args()
+
+    if not args.video:
+        ap.error("動画パスを指定してください (または環境変数 CLPCAT_SOURCE を設定)")
 
     ff = find_ffmpeg()
     ramp = args.ramp
